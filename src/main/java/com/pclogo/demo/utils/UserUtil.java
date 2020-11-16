@@ -13,4 +13,5 @@ public class UserUtil {
     Integer uid;
     String phone;
     List<Integer> friends;
+    String avatar;
 }

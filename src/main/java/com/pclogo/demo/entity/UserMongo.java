@@ -17,4 +17,7 @@ public class UserMongo {
 
     @Field("invit")
     List<Integer> invit;
+
+    @Field("avatar")
+    String avatar;
 }

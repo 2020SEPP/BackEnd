@@ -10,4 +10,5 @@ public interface UserService {
     Integer register(String name, String phone, String password);
     UserUtil searchByPhone(String friendPhone);
     List<UserUtil> searchByName(String name);
+    Boolean setAvatar(String avatar, Integer uid);
 }

@@ -26,7 +26,10 @@ public class UserServiceImpl implements UserService {
         }
         else
         {
+            String tmp = userUtil.getAvatar();
+            userUtil.setAvatar("");
             userUtil.setToken(JwtToken.createJWT(Constant.JWT_ID, JSON.toJSONString(userUtil), Constant.JWT_TTL));
+            userUtil.setAvatar(tmp);
         }
         return userUtil;
     }
@@ -52,6 +55,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserUtil> searchByName(String name) {
         return userDao.searchByName(name);
+    }
+
+    @Override
+    public Boolean setAvatar(String avatar, Integer uid) {
+        return userDao.setAvatar(avatar, uid);
     }
 
     @Override

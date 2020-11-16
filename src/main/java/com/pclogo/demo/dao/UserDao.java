@@ -12,4 +12,5 @@ public interface UserDao {
     UserUtil loginByName(String phone, String password);
     UserUtil searchByPhone(String phone);
     List<UserUtil> searchByName(String name);
+    Boolean setAvatar(String avatar, Integer uid);
 }

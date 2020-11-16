@@ -52,4 +52,10 @@ public class UserController {
     {
         return userService.searchByName(name);
     }
+
+    @RequestMapping("/loadAvatar")
+    public Boolean loadAvatar(@RequestParam("avatar") String avatar, @RequestParam Integer uid)
+    {
+        return userService.setAvatar(avatar, uid);
+    }
 }

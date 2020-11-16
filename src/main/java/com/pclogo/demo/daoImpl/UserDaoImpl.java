@@ -59,6 +59,7 @@ public class UserDaoImpl implements UserDao {
         userUtil.setUid(user.getId());
         userUtil.setPhone(user.getPhone());
         userUtil.setFriends(userMongo.getFriends());
+        userUtil.setAvatar(userMongo.getAvatar());
         return userUtil;
     }
 
@@ -83,9 +84,11 @@ public class UserDaoImpl implements UserDao {
             userUtil.setJudge(false);
         }
         else {
+            UserMongo userMongo = userMongoRepository.findById(user.getId()).orElse(null);
             userUtil.setJudge(true);
             userUtil.setUid(user.getId());
             userUtil.setName(user.getName());
+            userUtil.setAvatar(userMongo.getAvatar());
         }
         return userUtil;
     }
@@ -97,12 +100,24 @@ public class UserDaoImpl implements UserDao {
         List<UserUtil> reslist = new ArrayList<>();
         for (User user : list) {
             UserUtil tmp = new UserUtil();
+            UserMongo userMongo = userMongoRepository.findById(user.getId()).orElse(null);
             tmp.setJudge(true);
             tmp.setUid(user.getId());
             tmp.setName(user.getName());
+            tmp.setAvatar(userMongo.getAvatar());
             reslist.add(tmp);
         }
         return reslist;
+    }
+
+    @Override
+    public Boolean setAvatar(String avatar, Integer uid) {
+        UserMongo userMongo = userMongoRepository.findById(uid).orElse(null);
+        assert userMongo != null;
+        userMongo.setAvatar(avatar);
+        userMongoRepository.deleteById(uid);
+        userMongoRepository.save(userMongo);
+        return true;
     }
 
 }
