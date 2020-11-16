@@ -2,8 +2,12 @@ package com.pclogo.demo.service;
 
 import com.pclogo.demo.utils.UserUtil;
 
+import java.util.List;
+
 public interface UserService {
-    UserUtil login(String phone, String password);
+    UserUtil loginByPhone(String phone, String password);
+    UserUtil loginByName(String phone, String password);
     Integer register(String name, String phone, String password);
-    UserUtil search(String friendPhone);
+    UserUtil searchByPhone(String friendPhone);
+    List<UserUtil> searchByName(String name);
 }

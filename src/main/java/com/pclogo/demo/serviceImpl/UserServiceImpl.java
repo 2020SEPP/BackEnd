@@ -10,17 +10,17 @@ import com.pclogo.demo.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
-    @Override
-    public UserUtil login(String phone, String password) {
-        UserUtil userUtil;
-        if((userUtil = userDao.login(phone, password)) == null)
+    private UserUtil setToken(UserUtil userUtil)
+    {
+        if(userUtil == null)
         {
-//            userUtil = new UserUtil(false, null, null, null);
             userUtil = new UserUtil();
             userUtil.setJudge(false);
         }
@@ -32,6 +32,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserUtil loginByPhone(String phone, String password) {
+        return setToken(userDao.loginByPhone(phone, password));
+    }
+
+    @Override
+    public UserUtil loginByName(String name, String password) {
+        return setToken(userDao.loginByName(name, password));
+    }
+
+    @Override
     public Integer register(String name, String phone, String password) {
         if(userDao.lookup(phone) > 0) return 0;
         else if(userDao.lookupname(name) > 0) return -1;
@@ -40,8 +50,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserUtil search(String friendPhone) {
-        return userDao.search(friendPhone);
+    public List<UserUtil> searchByName(String name) {
+        return userDao.searchByName(name);
+    }
+
+    @Override
+    public UserUtil searchByPhone(String friendPhone) {
+        return userDao.searchByPhone(friendPhone);
     }
 
 }

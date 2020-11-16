@@ -11,5 +11,6 @@ public class UserUtil {
     Boolean judge;
     String token;
     Integer uid;
+    String phone;
     List<Integer> friends;
 }

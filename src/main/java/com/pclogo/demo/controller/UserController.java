@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @ResponseBody
 @RequestMapping("/user")
@@ -15,10 +17,16 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/login")
-    public UserUtil login(@RequestParam("phone") String phone, @RequestParam("password") String password)
+    @RequestMapping("/loginByPhone")
+    public UserUtil loginByPhone(@RequestParam("phone") String phone, @RequestParam("password") String password)
     {
-        return userService.login(phone, password);
+        return userService.loginByPhone(phone, password);
+    }
+
+    @RequestMapping("/loginByName")
+    public UserUtil loginByName(@RequestParam("name") String name, @RequestParam("password") String password)
+    {
+        return userService.loginByName(name, password);
     }
 
     @RequestMapping("/register")
@@ -33,9 +41,15 @@ public class UserController {
         return "如果你看到这句话，说明你的jwt已经可以用了";
     }
 
-    @RequestMapping("/search")
-    public UserUtil search(@RequestParam("friendPhone") String friendPhone)
+    @RequestMapping("/searchByPhone")
+    public UserUtil searchByPhone(@RequestParam("friendPhone") String friendPhone)
     {
-        return userService.search(friendPhone);
+        return userService.searchByPhone(friendPhone);
+    }
+
+    @RequestMapping("/searchByName")
+    public List<UserUtil> searchByName(@RequestParam("friendName") String name)
+    {
+        return userService.searchByName(name);
     }
 }
