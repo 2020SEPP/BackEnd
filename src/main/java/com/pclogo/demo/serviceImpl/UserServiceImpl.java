@@ -20,20 +20,28 @@ public class UserServiceImpl implements UserService {
         UserUtil userUtil;
         if((userUtil = userDao.login(phone, password)) == null)
         {
-            userUtil = new UserUtil(false, null, null, null);
+//            userUtil = new UserUtil(false, null, null, null);
+            userUtil = new UserUtil();
+            userUtil.setJudge(false);
         }
         else
         {
-            System.out.println(userUtil);
             userUtil.setToken(JwtToken.createJWT(Constant.JWT_ID, JSON.toJSONString(userUtil), Constant.JWT_TTL));
         }
         return userUtil;
     }
 
     @Override
-    public Boolean register(String phone, String password) {
-        if(userDao.lookup(phone) > 0) return false;
-        return userDao.register(phone, password);
+    public Integer register(String name, String phone, String password) {
+        if(userDao.lookup(phone) > 0) return 0;
+        else if(userDao.lookupname(name) > 0) return -1;
+        if(userDao.register(name, phone, password)) return 1;
+        else return -2;
+    }
+
+    @Override
+    public UserUtil search(String friendPhone) {
+        return userDao.search(friendPhone);
     }
 
 }

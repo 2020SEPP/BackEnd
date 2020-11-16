@@ -22,14 +22,20 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public Boolean register(@RequestParam("phone") String phone, @RequestParam("password") String password)
+    public Integer register(@RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("password") String password)
     {
-        return userService.register(phone, password);
+        return userService.register(name, phone, password);
     }
 
     @RequestMapping("/jwttest")
     public String jwttest()
     {
         return "如果你看到这句话，说明你的jwt已经可以用了";
+    }
+
+    @RequestMapping("/search")
+    public UserUtil search(@RequestParam("friendPhone") String friendPhone)
+    {
+        return userService.search(friendPhone);
     }
 }

@@ -6,8 +6,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class UserUtil {
+    String name;
     Boolean judge;
     String token;
     Integer uid;

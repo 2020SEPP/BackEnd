@@ -11,6 +11,10 @@ import java.util.List;
 public class UserMongo {
     @Field("id")
     Integer id;
+
     @Field("friends")
     List<Integer> friends;
+
+    @Field("invit")
+    List<Integer> invit;
 }

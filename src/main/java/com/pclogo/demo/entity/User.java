@@ -17,6 +17,9 @@ public class User {
     private Integer id;
 
     @Column
+    private String name;
+
+    @Column
     private String phone;
 
     @Column
