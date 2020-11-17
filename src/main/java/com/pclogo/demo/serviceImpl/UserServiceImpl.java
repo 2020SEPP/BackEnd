@@ -10,6 +10,7 @@ import com.pclogo.demo.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,6 +61,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean setAvatar(String avatar, Integer uid) {
         return userDao.setAvatar(avatar, uid);
+    }
+
+    @Override
+    public List<UserUtil> getFriend(Integer uid) {
+        List<Integer> list = userDao.getFriendList(uid);
+        List<UserUtil> res = new ArrayList<>();
+        for(Integer i:list)
+        {
+            UserUtil userUtil = userDao.getFriendByUid(i);
+            res.add(userUtil);
+        }
+        return res;
+    }
+
+    @Override
+    public Boolean updateInfo(Integer id, String name, String password) {
+        return userDao.updateInfo(id, name, password);
+    }
+
+    @Override
+    public Boolean updateAvatar(Integer id, String avatar) {
+        return userDao.updateAvatar(id, avatar);
     }
 
     @Override

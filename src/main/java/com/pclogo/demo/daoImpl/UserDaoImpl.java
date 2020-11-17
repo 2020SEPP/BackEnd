@@ -104,6 +104,7 @@ public class UserDaoImpl implements UserDao {
             tmp.setJudge(true);
             tmp.setUid(user.getId());
             tmp.setName(user.getName());
+            assert userMongo != null;
             tmp.setAvatar(userMongo.getAvatar());
             reslist.add(tmp);
         }
@@ -116,6 +117,47 @@ public class UserDaoImpl implements UserDao {
         assert userMongo != null;
         userMongo.setAvatar(avatar);
         userMongoRepository.deleteById(uid);
+        userMongoRepository.save(userMongo);
+        return true;
+    }
+
+    @Override
+    public List<Integer> getFriendList(Integer uid) {
+        UserMongo userMongo =  userMongoRepository.findById(uid).orElse(null);
+        assert userMongo != null;
+        return userMongo.getFriends();
+    }
+
+    @Override
+    public UserUtil getFriendByUid(Integer uid) {
+        UserUtil userUtil = new UserUtil();
+        User user = userRepository.findById(uid).orElse(null);
+        UserMongo userMongo = userMongoRepository.findById(uid).orElse(null);
+        assert userMongo != null;
+        userUtil.setAvatar(userMongo.getAvatar());
+        assert user != null;
+        userUtil.setUid(user.getId());
+        userUtil.setJudge(true);
+        userUtil.setName(user.getName());
+        return userUtil;
+    }
+
+    @Override
+    public Boolean updateInfo(Integer id, String name, String password) {
+        User user = userRepository.findById(id).orElse(null);
+        if(user == null) return false;
+        user.setName(name);
+        user.setPassword(password);
+        userRepository.saveAndFlush(user);
+        return true;
+    }
+
+    @Override
+    public Boolean updateAvatar(Integer id, String avatar) {
+        UserMongo userMongo = userMongoRepository.findById(id).orElse(null);
+        if(userMongo == null) return false;
+        userMongo.setAvatar(avatar);
+        userMongoRepository.deleteById(id);
         userMongoRepository.save(userMongo);
         return true;
     }

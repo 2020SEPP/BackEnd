@@ -11,4 +11,7 @@ public interface UserService {
     UserUtil searchByPhone(String friendPhone);
     List<UserUtil> searchByName(String name);
     Boolean setAvatar(String avatar, Integer uid);
+    List<UserUtil> getFriend(Integer uid);
+    Boolean updateInfo(Integer id, String name, String password);
+    Boolean updateAvatar(Integer id, String avatar);
 }

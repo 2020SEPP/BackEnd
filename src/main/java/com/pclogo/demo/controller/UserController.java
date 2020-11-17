@@ -58,4 +58,22 @@ public class UserController {
     {
         return userService.setAvatar(avatar, uid);
     }
+
+    @RequestMapping("/getFriend")
+    public List<UserUtil> getFriend(@RequestParam("uid") Integer uid)
+    {
+        return userService.getFriend(uid);
+    }
+
+    @RequestMapping("/updateInfo")
+    public Boolean updateInfo(@RequestParam("uid") Integer uid, @RequestParam("name") String name, @RequestParam("password") String password)
+    {
+        return userService.updateInfo(uid, name, password);
+    }
+
+    @RequestMapping("/updateAvatar")
+    public Boolean updateAvatar(@RequestParam("uid") Integer uid, @RequestParam("avatar") String avatar)
+    {
+        return userService.updateAvatar(uid, avatar);
+    }
 }
