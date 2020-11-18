@@ -86,6 +86,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean jiahaoyou(Integer uid, Integer touid) {
+        return userDao.jiahaoyou(uid, touid);
+    }
+
+    @Override
     public UserUtil searchByPhone(String friendPhone) {
         return userDao.searchByPhone(friendPhone);
     }

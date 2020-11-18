@@ -162,4 +162,23 @@ public class UserDaoImpl implements UserDao {
         return true;
     }
 
+    @Override
+    public Boolean jiahaoyou(Integer uid, Integer touid) {
+        UserMongo userMongo1 = userMongoRepository.findById(uid).orElse(null);
+        assert userMongo1 != null;
+        List<Integer> friends1 = userMongo1.getFriends();
+        friends1.add(touid);
+        userMongo1.setFriends(friends1);
+        userMongoRepository.deleteById(uid);
+        userMongoRepository.save(userMongo1);
+        UserMongo userMongo2 = userMongoRepository.findById(touid).orElse(null);
+        assert userMongo2 != null;
+        List<Integer> friends2 = userMongo2.getFriends();
+        friends2.add(uid);
+        userMongo2.setFriends(friends2);
+        userMongoRepository.deleteById(touid);
+        userMongoRepository.save(userMongo2);
+        return true;
+    }
+
 }

@@ -14,4 +14,5 @@ public interface UserService {
     List<UserUtil> getFriend(Integer uid);
     Boolean updateInfo(Integer id, String name, String password);
     Boolean updateAvatar(Integer id, String avatar);
+    Boolean jiahaoyou(Integer uid, Integer touid);
 }
