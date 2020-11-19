@@ -179,7 +179,6 @@ public class UserDaoImpl implements UserDao {
         System.out.println(userMongo1);
         System.out.println(uid);
         System.out.println(userMongoRepository.findById(uid));
-        userMongoRepository.deleteById(uid);
         userMongoRepository.save(userMongo1);
     }
 

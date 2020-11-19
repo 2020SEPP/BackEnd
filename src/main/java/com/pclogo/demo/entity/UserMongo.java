@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,11 +15,11 @@ public class UserMongo {
     Integer id;
 
     @Field("friends")
-    List<Integer> friends;
+    List<Integer> friends = new ArrayList<Integer>();
 
-    @Field("invit")
-    List<Integer> invit;
+    @Field("invite")
+    List<Integer> invite = new ArrayList<Integer>();
 
     @Field("avatar")
-    String avatar;
+    String avatar = "";
 }
