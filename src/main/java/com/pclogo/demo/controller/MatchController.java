@@ -1,6 +1,7 @@
 package com.pclogo.demo.controller;
 
 import com.pclogo.demo.service.MatchService;
+import com.pclogo.demo.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +40,11 @@ public class MatchController {
 
     @RequestMapping("/getCommand")
     List<String> getCommand(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid) {return matchService.getCommand(uid, rid);}
+
+    @RequestMapping("/getOthorPlayer")
+    UserUtil getOtherPlayer(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid)
+    {
+//        return matchService.getOtherPlayer(uid, rid);
+        return null;
+    }
 }

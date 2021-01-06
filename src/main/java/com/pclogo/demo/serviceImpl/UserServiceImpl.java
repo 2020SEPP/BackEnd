@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserUtil> getFriend(Integer uid) {
         List<Integer> list = userDao.getFriendList(uid);
+        if(list == null) return null;
         List<UserUtil> res = new ArrayList<>();
         for(Integer i:list)
         {

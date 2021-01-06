@@ -84,13 +84,18 @@ public class UserDaoImpl implements UserDao {
             userUtil.setJudge(false);
         }
         else {
-            UserMongo userMongo = userMongoRepository.findById(user.getId()).orElse(null);
-            userUtil.setJudge(true);
-            userUtil.setUid(user.getId());
-            userUtil.setName(user.getName());
-            userUtil.setAvatar(userMongo.getAvatar());
+            setUser(user, userUtil);
         }
         return userUtil;
+    }
+
+    private void setUser(User user, UserUtil userUtil) {
+        UserMongo userMongo = userMongoRepository.findById(user.getId()).orElse(null);
+        userUtil.setJudge(true);
+        userUtil.setUid(user.getId());
+        userUtil.setName(user.getName());
+        assert userMongo != null;
+        userUtil.setAvatar(userMongo.getAvatar());
     }
 
     @Override
@@ -100,16 +105,12 @@ public class UserDaoImpl implements UserDao {
         List<UserUtil> reslist = new ArrayList<>();
         for (User user : list) {
             UserUtil tmp = new UserUtil();
-            UserMongo userMongo = userMongoRepository.findById(user.getId()).orElse(null);
-            tmp.setJudge(true);
-            tmp.setUid(user.getId());
-            tmp.setName(user.getName());
-            assert userMongo != null;
-            tmp.setAvatar(userMongo.getAvatar());
+            setUser(user, tmp);
             reslist.add(tmp);
         }
         return reslist;
     }
+
 
     @Override
     public Boolean setAvatar(String avatar, Integer uid) {
@@ -167,6 +168,20 @@ public class UserDaoImpl implements UserDao {
         jiahaoyou1(uid, touid);
         jiahaoyou1(touid, uid);
         return true;
+    }
+
+    @Override
+    public UserUtil getById(Integer uid) {
+        User user = userRepository.findById(uid).orElse(null);
+        UserUtil userUtil = new UserUtil();
+        if(user == null)
+        {
+            userUtil.setJudge(false);
+        }
+        else {
+            setUser(user, userUtil);
+        }
+        return userUtil;
     }
 
     private void jiahaoyou1(Integer uid, Integer touid) {
