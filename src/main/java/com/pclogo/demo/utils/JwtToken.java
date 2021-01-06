@@ -35,4 +35,5 @@ public class JwtToken {
         jwt = jwt.replace("Bearer", "");
         return Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
     }
+
 }

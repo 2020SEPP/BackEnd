@@ -21,7 +21,9 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
             System.out.println("是空的");
             return false;
         }
-        Claims claims = JwtToken.parseJWT(token);
+        Claims claims = null;
+        claims = JwtToken.parseJWT(token);
+        if(claims == null) return false;
         String subject = claims.getSubject();
         JSONObject jsonObject = JSON.parseObject(subject);
         UserUtil userUtil = jsonObject.toJavaObject(UserUtil.class);

@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Component
 public class ScheduleCheck {
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5 * 60 * 1000)
     void test()
     {
         long current_time = System.currentTimeMillis();

@@ -3,7 +3,6 @@ package com.pclogo.demo.serviceImpl;
 import com.pclogo.demo.match.Room;
 import com.pclogo.demo.match.RoomUtil;
 import com.pclogo.demo.service.MatchService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,15 +10,15 @@ import java.util.Map;
 
 @Service
 public class MatchServiceImpl implements MatchService {
-//    static Room room;
 
     @Override
     public Integer createRoom(Integer uid) {
-        System.out.println(Room.current_id);
+//        System.out.println(Room.current_id);
         Room.current_id++;
         RoomUtil roomUtil = new RoomUtil();
         roomUtil.users.add(uid);
         Room.rooms.put(Room.current_id, roomUtil);
+        System.out.println(Room.rooms);
         return Room.current_id;
     }
 
@@ -52,47 +51,46 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public Boolean sendCommand(Integer uid, Integer rid, String command) {
+
+        RoomUtil roomUtil = Room.rooms.get(rid);
+        System.out.println(Room.rooms);
+        System.out.println("?");
+        if(roomUtil == null) return false;
+        System.out.println("!");
+        if(roomUtil.users.get(0).equals(uid))
+        {
+            roomUtil.user1Commands.add(command);
+            roomUtil.user1LastTime = System.currentTimeMillis();
+        }
+        else
+        {
+            roomUtil.user2Commands.add(command);
+            roomUtil.user2LastTime = System.currentTimeMillis();
+        }
+        Room.rooms.put(rid, roomUtil);
         for(Map.Entry<Integer, RoomUtil> entry : Room.rooms.entrySet())
         {
-            if(entry.getKey().equals(rid))
-            {
-                if(entry.getValue().users.get(0).equals(uid))
-                {
-                    entry.getValue().user1Commands.add(command);
-                    entry.getValue().user1LastTime = System.currentTimeMillis();
-                }
-                else
-                {
-                    entry.getValue().user2Commands.add(command);
-                    entry.getValue().user2LastTime = System.currentTimeMillis();
-                }
-                Room.rooms.put(entry.getKey(), entry.getValue());
-                return true;
-            }
+            System.out.println(entry.getValue().user1Commands);
         }
-        return false;
+        return true;
     }
 
     @Override
     public List<String> getCommand(Integer uid, Integer rid) {
-        for(Map.Entry<Integer, RoomUtil> entry : Room.rooms.entrySet())
+        RoomUtil roomUtil = Room.rooms.get(rid);
+        if(roomUtil == null) return null;
+        if(roomUtil.users.get(0).equals(uid))
         {
-            if(entry.getKey().equals(rid))
-            {
-                if(entry.getValue().users.get(0).equals(uid))
-                {
-                    entry.getValue().user1LastTime = System.currentTimeMillis();
-                    Room.rooms.put(entry.getKey(), entry.getValue());
-                    return entry.getValue().user2Commands;
-                }
-                else
-                {
-                    entry.getValue().user2LastTime = System.currentTimeMillis();
-                    Room.rooms.put(entry.getKey(), entry.getValue());
-                    return entry.getValue().user1Commands;
-                }
-            }
+            roomUtil.user1LastTime = System.currentTimeMillis();
+            Room.rooms.put(rid, roomUtil);
+            return roomUtil.user2Commands;
         }
-        return null;
+        else
+        {
+            roomUtil.user2LastTime = System.currentTimeMillis();
+            Room.rooms.put(rid, roomUtil);
+            return roomUtil.user1Commands;
+        }
+
     }
 }
