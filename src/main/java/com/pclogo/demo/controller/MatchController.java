@@ -41,7 +41,7 @@ public class MatchController {
     @RequestMapping("/getCommand")
     List<String> getCommand(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid) {return matchService.getCommand(uid, rid);}
 
-    @RequestMapping("/getOthorPlayer")
+    @RequestMapping("/getOtherPlayer")
     UserUtil getOtherPlayer(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid)
     {
         return matchService.getOtherPlayer(uid, rid);

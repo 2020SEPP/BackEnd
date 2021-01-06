@@ -25,6 +25,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         .excludePathPatterns("/match/joinSrand")
         .excludePathPatterns("/match/sendCommand")
         .excludePathPatterns("/match/getCommand")
+        .excludePathPatterns("/match/getOtherPlayer")
         ;
     }
 }

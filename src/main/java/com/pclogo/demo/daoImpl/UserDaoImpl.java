@@ -184,6 +184,7 @@ public class UserDaoImpl implements UserDao {
         else {
             setUser(user, userUtil);
         }
+        userUtil.setUid(null);
         return userUtil;
     }
 
