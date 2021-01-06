@@ -24,7 +24,7 @@ public class MatchServiceImpl implements MatchService {
 //        roomUtil.users.add(uid);
         roomUtil.user1 = uid;
         Room.rooms.put(Room.current_id, roomUtil);
-        System.out.println(Room.rooms);
+//        System.out.println(Room.rooms);
         return Room.current_id;
     }
 

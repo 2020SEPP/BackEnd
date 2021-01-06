@@ -16,7 +16,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception
     {
         String token = request.getHeader("token");
-        if(token.equals(""))
+        if(token == null || token.equals(""))
         {
             System.out.println("是空的");
             return false;
