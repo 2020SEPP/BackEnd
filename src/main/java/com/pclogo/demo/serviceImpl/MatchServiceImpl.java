@@ -75,6 +75,24 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public List<String> getCommand(Integer uid, Integer rid) {
+        for(Map.Entry<Integer, RoomUtil> entry : Room.rooms.entrySet())
+        {
+            if(entry.getKey().equals(rid))
+            {
+                if(entry.getValue().users.get(0).equals(uid))
+                {
+                    entry.getValue().user1LastTime = System.currentTimeMillis();
+                    Room.rooms.put(entry.getKey(), entry.getValue());
+                    return entry.getValue().user2Commands;
+                }
+                else
+                {
+                    entry.getValue().user2LastTime = System.currentTimeMillis();
+                    Room.rooms.put(entry.getKey(), entry.getValue());
+                    return entry.getValue().user1Commands;
+                }
+            }
+        }
         return null;
     }
 }

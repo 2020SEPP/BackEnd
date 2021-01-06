@@ -11,7 +11,7 @@ public class Room {
     public static Map<Integer, RoomUtil> rooms;
     public Room()
     {
-        current_id = 0;
+        current_id = 1000;
         rooms = new HashMap<>();
     }
 }
