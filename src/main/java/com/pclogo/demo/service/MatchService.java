@@ -1,5 +1,7 @@
 package com.pclogo.demo.service;
 
+import com.pclogo.demo.utils.UserUtil;
+
 import java.util.List;
 
 public interface MatchService {
@@ -8,4 +10,5 @@ public interface MatchService {
     Integer joinSrand(Integer uid);
     Boolean sendCommand(Integer uid, Integer rid, String command);
     List<String> getCommand(Integer uid, Integer rid);
+    UserUtil getOtherPlayer(Integer uid, Integer rid);
 }

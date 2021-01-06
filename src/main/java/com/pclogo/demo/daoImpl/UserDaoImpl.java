@@ -39,7 +39,10 @@ public class UserDaoImpl implements UserDao {
         userRepository.save(user);
         UserMongo userMongo = new UserMongo();
         userMongo.setId(user.getId());
-        userMongo.setFriends(null);
+        List<Integer> friends = new ArrayList<>();
+        List<Integer> invite = new ArrayList<>();
+        userMongo.setFriends(friends);:
+        userMongo.setInvite(invite);
         userMongoRepository.save(userMongo);
         return true;
     }
