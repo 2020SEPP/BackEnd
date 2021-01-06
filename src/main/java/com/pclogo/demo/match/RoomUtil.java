@@ -11,5 +11,7 @@ public class RoomUtil {
     public long user2LastTime = System.currentTimeMillis();
     public List<String> user1Commands = new ArrayList<>();
     public List<String> user2Commands = new ArrayList<>();
+    public Integer user1Read = 0;
+    public Integer user2Read = 0;
 
 }

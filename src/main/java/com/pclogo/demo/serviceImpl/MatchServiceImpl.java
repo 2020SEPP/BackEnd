@@ -71,9 +71,7 @@ public class MatchServiceImpl implements MatchService {
 
         RoomUtil roomUtil = Room.rooms.get(rid);
         System.out.println(Room.rooms);
-        System.out.println("?");
         if(roomUtil == null) return false;
-        System.out.println("!");
         if(roomUtil.user1.equals(uid))
         {
             roomUtil.user1Commands.add(command);
@@ -100,17 +98,17 @@ public class MatchServiceImpl implements MatchService {
         if(roomUtil == null) return null;
         if(roomUtil.user1.equals(uid))
         {
-            res = roomUtil.user2Commands;
+            for(; roomUtil.user1Read < roomUtil.user2Commands.size(); ++roomUtil.user1Read)
+                res.add(roomUtil.user2Commands.get(roomUtil.user1Read));
             roomUtil.user1LastTime = System.currentTimeMillis();
-            roomUtil.user2Commands.clear();
             Room.rooms.put(rid, roomUtil);
             return res;
         }
         else if(roomUtil.user2.equals(uid))
         {
-            res = roomUtil.user1Commands;
+            for(; roomUtil.user2Read < roomUtil.user1Commands.size(); ++roomUtil.user2Read)
+                res.add(roomUtil.user1Commands.get(roomUtil.user2Read));
             roomUtil.user2LastTime = System.currentTimeMillis();
-            roomUtil.user1Commands.clear();
             Room.rooms.put(rid, roomUtil);
             return res;
         }
