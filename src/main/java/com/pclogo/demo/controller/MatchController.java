@@ -4,7 +4,10 @@ import com.pclogo.demo.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @ResponseBody
@@ -14,20 +17,26 @@ public class MatchController {
     MatchService matchService;
 
     @RequestMapping("/createRoom")
-    Integer createRoom(Integer uid)
+    Integer createRoom(@RequestParam("uid") Integer uid)
     {
         return matchService.createRoom(uid);
     }
 
     @RequestMapping("/joinById")
-    Boolean joinById(Integer uid, Integer rid)
+    Boolean joinById(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid)
     {
         return matchService.joinById(uid, rid);
     }
 
-    @RequestMapping("joinSrand")
-    Integer joinSrand(Integer uid)
+    @RequestMapping("/joinSrand")
+    Integer joinSrand(@RequestParam("uid") Integer uid)
     {
         return matchService.joinSrand(uid);
     }
+
+    @RequestMapping("/sendCommand")
+    Boolean sendCommand(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid, @RequestParam("command") String command) {return matchService.sendCommand(uid, rid, command);}
+
+    @RequestMapping("/getCommand")
+    List<String> getCommand(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid) {return matchService.getCommand(uid, rid);}
 }

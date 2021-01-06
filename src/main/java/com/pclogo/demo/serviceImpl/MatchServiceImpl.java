@@ -6,6 +6,7 @@ import com.pclogo.demo.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -47,5 +48,33 @@ public class MatchServiceImpl implements MatchService {
             }
         }
         return -1;
+    }
+
+    @Override
+    public Boolean sendCommand(Integer uid, Integer rid, String command) {
+        for(Map.Entry<Integer, RoomUtil> entry : Room.rooms.entrySet())
+        {
+            if(entry.getKey().equals(rid))
+            {
+                if(entry.getValue().users.get(0).equals(uid))
+                {
+                    entry.getValue().user1Commands.add(command);
+                    entry.getValue().user1LastTime = System.currentTimeMillis();
+                }
+                else
+                {
+                    entry.getValue().user2Commands.add(command);
+                    entry.getValue().user2LastTime = System.currentTimeMillis();
+                }
+                Room.rooms.put(entry.getKey(), entry.getValue());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<String> getCommand(Integer uid, Integer rid) {
+        return null;
     }
 }
