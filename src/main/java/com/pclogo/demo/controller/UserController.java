@@ -77,9 +77,27 @@ public class UserController {
         return userService.updateAvatar(uid, avatar);
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/jiahaoyou")
     public Boolean jiahaoyou(@RequestParam("uid") Integer uid, @RequestParam("touid") Integer touid)
     {
         return userService.jiahaoyou(uid, touid);
+    }
+
+    @RequestMapping("/sendInvite")
+    public void sendInvite(@RequestParam("uid") Integer uid, @RequestParam("touid") Integer touid)
+    {
+        userService.sendInvite(uid, touid);
+    }
+
+    @RequestMapping("/checkInvite")
+    public List<UserUtil> checkInvite(@RequestParam("uid") Integer uid)
+    {
+        return userService.checkInvite(uid);
+    }
+
+    @RequestMapping("/acceptInvite")
+    public Boolean acceptInvite(@RequestParam("uid") Integer uid, @RequestParam("auid") Integer auid, @RequestParam("accept") Integer accept)
+    {
+        return userService.acceptInvite(uid, auid, accept);
     }
 }

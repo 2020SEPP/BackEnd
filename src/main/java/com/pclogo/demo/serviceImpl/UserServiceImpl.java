@@ -92,6 +92,57 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void sendInvite(Integer uid, Integer touid) {
+        if(uid.equals(touid)) return;
+        List<Integer> invites = userDao.getInvites(touid);
+        invites.add(uid);
+        userDao.setInvites(touid, invites);
+    }
+
+    @Override
+    public List<UserUtil> checkInvite(Integer uid)
+    {
+        List<Integer> invites = userDao.getInvites(uid);
+        List<UserUtil> res = new ArrayList<>();
+        for(Integer i : invites)
+        {
+            UserUtil userUtil = userDao.getById(i);
+            res.add(userUtil);
+        }
+        return res;
+    }
+    void setFriend(Integer uid, Integer touid)
+    {
+        List<Integer> friends = userDao.getFriendList(uid);
+        friends.add(touid);
+        userDao.setFriends(uid, friends);
+    }
+
+    @Override
+    public Boolean acceptInvite(Integer uid, Integer touid, Integer accept)
+    {
+        //不论如何处理，都要将申请移除
+        List<Integer> invites = userDao.getInvites(uid);
+        if(invites == null) return false;
+        for(int i = 0; i < invites.size(); ++i)
+        {
+            if(invites.get(i).equals(touid))
+            {
+                invites.remove(i);
+                i--;
+            }
+
+        }
+        userDao.setInvites(uid, invites);
+        //拒绝
+        if(accept == 0) return true;
+        //接受
+        setFriend(uid, touid);
+        setFriend(touid, uid);
+        return true;
+    }
+
+    @Override
     public UserUtil searchByPhone(String friendPhone) {
         return userDao.searchByPhone(friendPhone);
     }

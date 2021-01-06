@@ -181,11 +181,34 @@ public class UserDaoImpl implements UserDao {
         {
             userUtil.setJudge(false);
         }
-        else {
+        else
+        {
             setUser(user, userUtil);
         }
-        userUtil.setUid(null);
         return userUtil;
+    }
+
+    @Override
+    public List<Integer> getInvites(Integer uid) {
+        UserMongo userMongo = userMongoRepository.findById(uid).orElse(null);
+        if(userMongo == null) return null;
+        return userMongo.getInvite();
+    }
+
+    @Override
+    public void setInvites(Integer uid, List<Integer> invites) {
+        UserMongo userMongo = userMongoRepository.findById(uid).orElse(null);
+        if(userMongo == null) return;
+        userMongo.setInvite(invites);
+        userMongoRepository.save(userMongo);
+    }
+
+    @Override
+    public void setFriends(Integer uid, List<Integer> friends) {
+        UserMongo userMongo = userMongoRepository.findById(uid).orElse(null);
+        if(userMongo == null) return;
+        userMongo.setFriends(friends);
+        userMongoRepository.save(userMongo);
     }
 
     private void jiahaoyou1(Integer uid, Integer touid) {

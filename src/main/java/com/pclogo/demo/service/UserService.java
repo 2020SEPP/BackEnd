@@ -15,4 +15,7 @@ public interface UserService {
     Boolean updateInfo(Integer id, String name, String password);
     Boolean updateAvatar(Integer id, String avatar);
     Boolean jiahaoyou(Integer uid, Integer touid);
+    void sendInvite(Integer uid, Integer touid);
+    List<UserUtil> checkInvite(Integer uid);
+    Boolean acceptInvite(Integer uid, Integer touid, Integer accept);
 }

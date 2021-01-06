@@ -8,6 +8,7 @@ import com.pclogo.demo.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -95,18 +96,23 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public List<String> getCommand(Integer uid, Integer rid) {
         RoomUtil roomUtil = Room.rooms.get(rid);
+        List<String> res = new ArrayList<>();
         if(roomUtil == null) return null;
         if(roomUtil.user1.equals(uid))
         {
+            res = roomUtil.user2Commands;
             roomUtil.user1LastTime = System.currentTimeMillis();
+            roomUtil.user2Commands.clear();
             Room.rooms.put(rid, roomUtil);
-            return roomUtil.user2Commands;
+            return res;
         }
         else if(roomUtil.user2.equals(uid))
         {
+            res = roomUtil.user1Commands;
             roomUtil.user2LastTime = System.currentTimeMillis();
+            roomUtil.user1Commands.clear();
             Room.rooms.put(rid, roomUtil);
-            return roomUtil.user1Commands;
+            return res;
         }
         return null;
     }

@@ -19,4 +19,7 @@ public interface UserDao {
     Boolean updateAvatar(Integer id, String avatar);
     Boolean jiahaoyou(Integer uid, Integer touid);
     UserUtil getById(Integer uid);
+    List<Integer> getInvites(Integer uid);
+    void setInvites(Integer uid, List<Integer> invites);
+    void setFriends(Integer uid, List<Integer> friends);
 }
