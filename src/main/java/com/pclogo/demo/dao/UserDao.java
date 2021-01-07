@@ -22,4 +22,5 @@ public interface UserDao {
     List<Integer> getInvites(Integer uid);
     void setInvites(Integer uid, List<Integer> invites);
     void setFriends(Integer uid, List<Integer> friends);
+    int test();
 }

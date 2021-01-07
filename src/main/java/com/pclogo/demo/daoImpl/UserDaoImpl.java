@@ -214,6 +214,11 @@ public class UserDaoImpl implements UserDao {
         userMongoRepository.save(userMongo);
     }
 
+    @Override
+    public int test() {
+        return 100;
+    }
+
     private void jiahaoyou1(Integer uid, Integer touid) {
         UserMongo userMongo1 = userMongoRepository.findById(uid).orElse(null);
         assert userMongo1 != null;
