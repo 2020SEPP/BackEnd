@@ -28,6 +28,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/match/getOtherPlayer")
         .excludePathPatterns("/user/searchByName")
         .excludePathPatterns("/user/searchByPhone")
+        .excludePathPatterns("/user/acceptInvite")
+        .excludePathPatterns("/user/sendInvite")
+        .excludePathPatterns("/user/checkInvite")
         ;
     }
 }

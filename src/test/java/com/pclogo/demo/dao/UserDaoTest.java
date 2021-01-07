@@ -45,9 +45,7 @@ public class UserDaoTest extends DemoApplicationTests {
     @Transactional
     public void lookupTest()
     {
-//        System.out.println(userDao.lookup("15044341612"));
-//        System.out.println("??");
-//        userDao.test();
+        System.out.println("?");
     }
 
 }

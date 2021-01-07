@@ -105,9 +105,24 @@ public class UserServiceImpl implements UserService {
     public List<UserUtil> checkInvite(Integer uid)
     {
         List<Integer> invites = userDao.getInvites(uid);
+        List<Integer> friends = userDao.getFriendList(uid);
+
+        for(int i = 0; i < friends.size(); ++i)
+        {
+            for(int j = 0; j < invites.size(); ++j)
+            {
+                if(friends.get(i).equals(invites.get(j)))
+                {
+                    invites.remove(j);
+                    break;
+                }
+            }
+        }
+        userDao.setInvites(uid, invites);
         List<UserUtil> res = new ArrayList<>();
         for(Integer i : invites)
         {
+
             UserUtil userUtil = userDao.getById(i);
             res.add(userUtil);
         }
