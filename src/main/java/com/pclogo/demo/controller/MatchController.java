@@ -18,9 +18,9 @@ public class MatchController {
     MatchService matchService;
 
     @RequestMapping("/createRoom")
-    Integer createRoom(@RequestParam("uid") Integer uid)
+    Integer createRoom(@RequestParam("uid") Integer uid, @RequestParam("isSingle") Integer isSingle)
     {
-        return matchService.createRoom(uid);
+        return matchService.createRoom(uid, isSingle);
     }
 
     @RequestMapping("/joinById")
@@ -30,9 +30,9 @@ public class MatchController {
     }
 
     @RequestMapping("/joinSrand")
-    Integer joinSrand(@RequestParam("uid") Integer uid)
+    Integer joinSrand(@RequestParam("uid") Integer uid, @RequestParam("isSingle") Integer isSingle)
     {
-        return matchService.joinSrand(uid);
+        return matchService.joinSrand(uid, isSingle);
     }
 
     @RequestMapping("/sendCommand")

@@ -18,10 +18,11 @@ public class MatchServiceImpl implements MatchService {
     UserDao userDao;
 
     @Override
-    public Integer createRoom(Integer uid) {
+    public Integer createRoom(Integer uid, Integer isSingle) {
 //        System.out.println(Room.current_id);
         Room.current_id++;
         RoomUtil roomUtil = new RoomUtil();
+        roomUtil.isSingle = isSingle;
 //        roomUtil.users.add(uid);
         roomUtil.user1 = uid;
         Room.rooms.put(Room.current_id, roomUtil);
@@ -42,11 +43,11 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Integer joinSrand(Integer uid) {
+    public Integer joinSrand(Integer uid, Integer isSingle) {
         if(Room.rooms.size() == 0) return -1;
         for(Map.Entry<Integer, RoomUtil> entry : Room.rooms.entrySet())
         {
-            if(entry.getValue().user1 == -1)
+            if(entry.getValue().user1 == -1 && entry.getValue().isSingle.equals(isSingle))
             {
                 RoomUtil roomUtil = entry.getValue();
                 roomUtil.user1 = uid;
@@ -54,7 +55,7 @@ public class MatchServiceImpl implements MatchService {
                 Room.rooms.put(rid, roomUtil);
                 return rid;
             }
-            else if(entry.getValue().user2 == -1)
+            else if(entry.getValue().user2 == -1 && entry.getValue().isSingle.equals(isSingle))
             {
                 RoomUtil roomUtil = entry.getValue();
                 roomUtil.user2 = uid;

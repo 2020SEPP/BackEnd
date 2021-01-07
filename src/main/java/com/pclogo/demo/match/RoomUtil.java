@@ -5,6 +5,7 @@ import java.util.List;
 
 public class RoomUtil {
 //    public List<Integer> users = new ArrayList<>();
+    public Integer isSingle = 0;
     public Integer user1 = -1;
     public Integer user2 = -1;
     public long user1LastTime = System.currentTimeMillis();
