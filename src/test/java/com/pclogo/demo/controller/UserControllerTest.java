@@ -11,10 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserControllerTest {
     @Autowired
     UserController userController;
+
     @Test
     public void test()
     {
-        String name = "珺";
-        System.out.println(userController.searchByName(name));
+        System.out.println("?");
     }
 }
