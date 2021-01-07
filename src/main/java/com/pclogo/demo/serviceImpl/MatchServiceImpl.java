@@ -57,6 +57,7 @@ public class MatchServiceImpl implements MatchService {
                 roomUtil.user1 = uid;
                 Integer rid = entry.getKey();
                 Room.rooms.put(rid, roomUtil);
+                Room.using = false;
                 return rid;
             }
             else if(entry.getValue().user2 == -1 && entry.getValue().isSingle.equals(isSingle))
@@ -65,9 +66,11 @@ public class MatchServiceImpl implements MatchService {
                 roomUtil.user2 = uid;
                 Integer rid = entry.getKey();
                 Room.rooms.put(rid, roomUtil);
+                Room.using = false;
                 return rid;
             }
         }
+        Room.using = false;
         return -1;
     }
 
