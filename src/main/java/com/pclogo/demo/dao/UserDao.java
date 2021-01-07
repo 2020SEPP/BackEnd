@@ -17,10 +17,8 @@ public interface UserDao {
     UserUtil getFriendByUid(Integer uid);
     Boolean updateInfo(Integer id, String name, String password);
     Boolean updateAvatar(Integer id, String avatar);
-    Boolean jiahaoyou(Integer uid, Integer touid);
     UserUtil getById(Integer uid);
     List<Integer> getInvites(Integer uid);
     void setInvites(Integer uid, List<Integer> invites);
     void setFriends(Integer uid, List<Integer> friends);
-    int test();
 }

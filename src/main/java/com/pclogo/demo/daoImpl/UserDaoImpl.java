@@ -170,13 +170,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Boolean jiahaoyou(Integer uid, Integer touid) {
-        jiahaoyou1(uid, touid);
-        jiahaoyou1(touid, uid);
-        return true;
-    }
-
-    @Override
     public UserUtil getById(Integer uid) {
         User user = userRepository.findById(uid).orElse(null);
         UserUtil userUtil = new UserUtil();
@@ -212,11 +205,6 @@ public class UserDaoImpl implements UserDao {
         if(userMongo == null) return;
         userMongo.setFriends(friends);
         userMongoRepository.save(userMongo);
-    }
-
-    @Override
-    public int test() {
-        return 100;
     }
 
     private void jiahaoyou1(Integer uid, Integer touid) {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Document(collation = "userMongo")
+@Document("userMongo")
 public class UserMongo {
     @Id
     Integer id;

@@ -77,12 +77,6 @@ public class UserController {
         return userService.updateAvatar(uid, avatar);
     }
 
-    @RequestMapping("/jiahaoyou")
-    public Boolean jiahaoyou(@RequestParam("uid") Integer uid, @RequestParam("touid") Integer touid)
-    {
-        return userService.jiahaoyou(uid, touid);
-    }
-
     @RequestMapping("/sendInvite")
     public void sendInvite(@RequestParam("uid") Integer uid, @RequestParam("touid") Integer touid)
     {

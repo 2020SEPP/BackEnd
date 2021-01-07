@@ -87,11 +87,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean jiahaoyou(Integer uid, Integer touid) {
-        return userDao.jiahaoyou(uid, touid);
-    }
-
-    @Override
     public void sendInvite(Integer uid, Integer touid) {
         if(uid.equals(touid)) return;
         List<Integer> friends = userDao.getFriendList(uid);
@@ -118,6 +113,7 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }
+
         userDao.setInvites(uid, invites);
         List<UserUtil> res = new ArrayList<>();
         for(Integer i : invites)

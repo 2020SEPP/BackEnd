@@ -14,7 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,66 +60,87 @@ class UserDaoImplTest extends DemoApplicationTests
     }
 
     @Test
+//    @Transactional
     void register() {
+        userDao.register("xjh1", "18018592215", "111111");
     }
 
     @Test
     void loginByPhone() {
+        userDao.loginByPhone("15044341612", "111111");
     }
 
     @Test
     void loginByName() {
+        userDao.loginByName("xjh", "111111");
     }
 
     @Test
     void searchByPhone() {
+        userDao.searchByPhone("-1");
+        userDao.searchByPhone("15044341612");
     }
 
     @Test
     void searchByName() {
+        userDao.searchByName("xjh");
+        userDao.searchByName("发生什么事了");
     }
 
     @Test
     void setAvatar() {
+        userDao.setAvatar("666", 2);
+        userDao.setAvatar("777", -1);
     }
 
     @Test
     void getFriendList() {
+        userDao.getFriendList(2);
+        userDao.getFriendList(-1);
     }
 
     @Test
     void getFriendByUid() {
+        userDao.getFriendByUid(2);
+        userDao.getFriendByUid(-1);
     }
 
     @Test
     void updateInfo() {
+        userDao.updateInfo(2, "pocker", "??????");
+        userDao.updateInfo(-1, "pocker", "??????");
     }
 
     @Test
     void updateAvatar() {
-    }
-
-    @Test
-    void jiahaoyou() {
+        userDao.updateAvatar(2, "667");
+        userDao.updateAvatar(-1, "667");
     }
 
     @Test
     void getById() {
+        userDao.getById(2);
+        userDao.getById(-1);
     }
 
     @Test
     void getInvites() {
+        userDao.getInvites(2);
+        userDao.getInvites(-1);
     }
 
     @Test
     void setInvites() {
+        List<Integer> tmp = new ArrayList<>();
+        userDao.setInvites(2, tmp);
+        userDao.setInvites(-1, tmp);
     }
 
     @Test
     void setFriends() {
+        List<Integer> tmp = new ArrayList<>();
+        userDao.setInvites(2, tmp);
+        userDao.setInvites(-1, tmp);
     }
 
-    @Test
-    void test1() {
-    }
 }
