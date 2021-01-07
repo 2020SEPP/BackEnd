@@ -24,9 +24,9 @@ public class MatchController {
     }
 
     @RequestMapping("/joinById")
-    Boolean joinById(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid)
+    Boolean joinById(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid, @RequestParam("isSingle") Integer isSingle)
     {
-        return matchService.joinById(uid, rid);
+        return matchService.joinById(uid, rid, isSingle);
     }
 
     @RequestMapping("/joinSrand")

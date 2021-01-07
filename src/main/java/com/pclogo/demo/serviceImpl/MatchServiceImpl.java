@@ -31,9 +31,10 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Boolean joinById(Integer uid, Integer rid) {
+    public Boolean joinById(Integer uid, Integer rid, Integer isSingle) {
         RoomUtil roomUtil = Room.rooms.get(rid);
         if(roomUtil == null) return false;
+        if(!roomUtil.isSingle.equals(isSingle)) return false;
         else if(roomUtil.user1 != -1 && roomUtil.user2 != -1) return false;
 //        roomUtil.users.add(uid);
         if(roomUtil.user1 == -1) roomUtil.user1 = uid;
