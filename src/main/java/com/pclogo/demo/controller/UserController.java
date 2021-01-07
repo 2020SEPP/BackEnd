@@ -35,11 +35,11 @@ public class UserController {
         return userService.register(name, phone, password);
     }
 
-    @RequestMapping("/jwttest")
-    public String jwttest()
-    {
-        return "如果你看到这句话，说明你的jwt已经可以用了";
-    }
+//    @RequestMapping("/jwttest")
+//    public String jwttest()
+//    {
+//        return "如果你看到这句话，说明你的jwt已经可以用了";
+//    }
 
     @RequestMapping("/searchByPhone")
     public UserUtil searchByPhone(@RequestParam("friendPhone") String friendPhone)

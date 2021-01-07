@@ -45,7 +45,10 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public Integer joinSrand(Integer uid, Integer isSingle) {
+        while(Room.using);
+        Room.using = true;
         if(Room.rooms.size() == 0) return -1;
+
         for(Map.Entry<Integer, RoomUtil> entry : Room.rooms.entrySet())
         {
             if(entry.getValue().user1 == -1 && entry.getValue().isSingle.equals(isSingle))
