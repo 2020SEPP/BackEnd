@@ -21,11 +21,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/user/loginByPhone")
                 .excludePathPatterns("/user/jiahaoyou")
                 .excludePathPatterns("/match/createRoom")
-        .excludePathPatterns("/match/joinById")
-        .excludePathPatterns("/match/joinSrand")
-        .excludePathPatterns("/match/sendCommand")
-        .excludePathPatterns("/match/getCommand")
-        .excludePathPatterns("/match/getOtherPlayer")
+                .excludePathPatterns("/match/joinById")
+                .excludePathPatterns("/match/joinSrand")
+                .excludePathPatterns("/match/sendCommand")
+                .excludePathPatterns("/match/getCommand")
+                .excludePathPatterns("/match/getOtherPlayer")
+        .excludePathPatterns("/user/searchByName")
+        .excludePathPatterns("/user/searchByPhone")
         ;
     }
 }

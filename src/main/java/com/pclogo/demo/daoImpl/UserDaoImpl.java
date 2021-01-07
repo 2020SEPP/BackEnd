@@ -106,7 +106,9 @@ public class UserDaoImpl implements UserDao {
         String src = "%";
         src += name;
         src += "%";
+        System.out.println("你要搜索的是：" + src);
         List<User> list = userRepository.searchByName(src);
+        System.out.println("搜索到了：" + list);
         if(list == null) return null;
         List<UserUtil> reslist = new ArrayList<>();
         for (User user : list) {
