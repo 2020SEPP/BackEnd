@@ -31,6 +31,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         .excludePathPatterns("/user/acceptInvite")
         .excludePathPatterns("/user/sendInvite")
         .excludePathPatterns("/user/checkInvite")
+        .excludePathPatterns("/transform")
         ;
     }
 }

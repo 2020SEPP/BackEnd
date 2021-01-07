@@ -35,6 +35,8 @@ public class WebIATWS extends WebSocketListener {
     public static final int StatusLastFrame = 2;
     public static final Gson json = new Gson();
     Decoder decoder = new Decoder();
+    public static String message = "";
+    public static Boolean finish = false;
     // 开始时间
     private static Date dateBegin = new Date();
     // 结束时间
@@ -130,6 +132,7 @@ public class WebIATWS extends WebSocketListener {
     }
     @Override
     public void onMessage(WebSocket webSocket, String text) {
+        message = "";
         super.onMessage(webSocket, text);
         //System.out.println(text);
         ResponseData resp = json.fromJson(text, ResponseData.class);
@@ -158,6 +161,8 @@ public class WebIATWS extends WebSocketListener {
                     System.out.println(sdf.format(dateEnd) + "结束");
                     System.out.println("耗时:" + (dateEnd.getTime() - dateBegin.getTime()) + "ms");
                     System.out.println("最终识别结果 ==》" + decoder.toString());
+                    message = decoder.toString();
+                    finish = true;
                     System.out.println("本次识别sid ==》" + resp.getSid());
                     decoder.discard();
                     webSocket.close(1000, "");
@@ -185,7 +190,8 @@ public class WebIATWS extends WebSocketListener {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) throws Exception {
+    //String[] args
+    public static void main() throws Exception {
         // 构建鉴权url
         String authUrl = getAuthUrl(hostUrl, apiKey, apiSecret);
         OkHttpClient client = new OkHttpClient.Builder().build();
@@ -197,6 +203,18 @@ public class WebIATWS extends WebSocketListener {
         //System.out.println("url===>" + url);
         WebSocket webSocket = client.newWebSocket(request, new WebIATWS());
     }
+//        public static void transform(String[] args) throws Exception {
+//        // 构建鉴权url
+//        String authUrl = getAuthUrl(hostUrl, apiKey, apiSecret);
+//        OkHttpClient client = new OkHttpClient.Builder().build();
+//        //将url中的 schema http://和https://分别替换为ws:// 和 wss://
+//        String url = authUrl.toString().replace("http://", "ws://").replace("https://", "wss://");
+//        //System.out.println(url);
+//        Request request = new Request.Builder().url(url).build();
+//        // System.out.println(client.newCall(request).execute());
+//        //System.out.println("url===>" + url);
+//        WebSocket webSocket = client.newWebSocket(request, new WebIATWS());
+//    }
     public static String getAuthUrl(String hostUrl, String apiKey, String apiSecret) throws Exception {
         URL url = new URL(hostUrl);
         SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
@@ -349,7 +367,7 @@ public class WebIATWS extends WebSocketListener {
             }
         }
         public void discard(){
-            for(int i=0;i<this.texts.length;i++){
+            for(int i=0; i<this.texts.length;i++){
                 this.texts[i]= null;
             }
         }

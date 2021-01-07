@@ -59,33 +59,64 @@ class UserControllerTest {
 
     @Test
     void searchByName() {
+        userController.searchByName("xjh");
+        userController.searchByName("-1");
+
     }
 
     @Test
     void loadAvatar() {
+        userController.loadAvatar("?", 2);
+        userController.loadAvatar("?", -1);
+
     }
 
     @Test
     void getFriend() {
+        userController.getFriend(2);
+        userController.getFriend(-1);
+
     }
 
     @Test
     void updateInfo() {
+        userController.updateInfo(2, "xjh", "111111");
+        userController.updateInfo(-1, "xjh", "111111");
+
     }
 
     @Test
     void updateAvatar() {
+        userController.updateAvatar(2, "?");
+        userController.updateAvatar(-1, "?");
+
     }
 
     @Test
     void sendInvite() {
+        userController.sendInvite(2, 1);
+        userController.sendInvite(2, -1);
+        userController.sendInvite(-1, 2);
+//        userController.sendInvite(2, -1);
+
     }
 
     @Test
     void checkInvite() {
+        userController.checkInvite(1);
+        userController.checkInvite(2);
+
+        userController.checkInvite(-1);
     }
 
     @Test
     void acceptInvite() {
+        userController.acceptInvite(1, 2, 1);
+        userController.acceptInvite(1, 2, 0);
+        userController.acceptInvite(-1, 2, 1);
+        userController.acceptInvite(-1, 2, 0);
+        userController.acceptInvite(2, -1, 1);
+        userController.acceptInvite(2, -1, 0);
+
     }
 }

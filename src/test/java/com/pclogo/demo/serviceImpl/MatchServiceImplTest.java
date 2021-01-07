@@ -1,5 +1,6 @@
 package com.pclogo.demo.serviceImpl;
 
+import com.pclogo.demo.service.MatchService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 class MatchServiceImplTest {
+    @Autowired
+    MatchServiceImpl matchService;
 
     @Autowired
     WebApplicationContext context;
@@ -37,25 +40,61 @@ class MatchServiceImplTest {
 
     @Test
     void createRoom() {
+        matchService.createRoom(2, 0);
     }
 
     @Test
     void joinById() {
+        matchService.createRoom(2, 0);
+        matchService.joinById(2, 1001, 0);
+        matchService.joinById(1, 1001, 1);
+        matchService.joinById(1, 1001, 0);
+        matchService.joinById(3, 1001, 0);
+
     }
 
     @Test
     void joinSrand() {
+        matchService.createRoom(2, 0);
+        matchService.joinSrand(2, 0);
+        matchService.joinSrand(1, 1);
+        matchService.joinSrand(1, 0);
+        matchService.joinSrand(3, 0);
+
     }
 
     @Test
     void sendCommand() {
+        matchService.createRoom(2, 0);
+        matchService.sendCommand(2, 1001, "fd 100");
+        matchService.joinById(1, 1001, 0);
+        matchService.sendCommand(2, 1001, "fd 100");
+        matchService.sendCommand(1, 1001, "fd 1000");
     }
 
     @Test
     void getCommand() {
+        matchService.createRoom(2, 0);
+        matchService.joinById(1, 1001, 0);
+        matchService.sendCommand(2, 1001, "fd 100");
+        matchService.sendCommand(1, 1001, "fd 1000");
+        matchService.getCommand(1, 1001);
+        matchService.getCommand(2, 1001);
+        matchService.getCommand(1, 1002);
+        matchService.getCommand(2, 1002);
+
     }
 
     @Test
     void getOtherPlayer() {
+        matchService.createRoom(2, 0);
+        matchService.getOtherPlayer(2, 1001);
+        matchService.getOtherPlayer(1, 1001);
+        matchService.getOtherPlayer(2, 1002);
+
+        matchService.joinById(1, 1001, 0);
+        matchService.getOtherPlayer(2, 1001);
+        matchService.getOtherPlayer(1, 1001);
+
     }
 }
