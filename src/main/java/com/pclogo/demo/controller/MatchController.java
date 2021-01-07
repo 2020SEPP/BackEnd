@@ -45,6 +45,6 @@ public class MatchController {
     UserUtil getOtherPlayer(@RequestParam("uid") Integer uid, @RequestParam("rid") Integer rid)
     {
         return matchService.getOtherPlayer(uid, rid);
-//        return null;
     }
+
 }

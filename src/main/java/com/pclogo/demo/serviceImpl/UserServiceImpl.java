@@ -94,6 +94,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void sendInvite(Integer uid, Integer touid) {
         if(uid.equals(touid)) return;
+        List<Integer> friends = userDao.getFriendList(uid);
+        for(Integer friend : friends) if(friend.equals(touid)) return;
         List<Integer> invites = userDao.getInvites(touid);
         invites.add(uid);
         userDao.setInvites(touid, invites);
