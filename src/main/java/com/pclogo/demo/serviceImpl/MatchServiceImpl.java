@@ -133,4 +133,12 @@ public class MatchServiceImpl implements MatchService {
         else return null;
         return userDao.getById(dst);
     }
+
+    @Override
+    public void removeRoom(Integer uid, Integer rid) {
+        if(Room.rooms.get(rid) == null) return;
+        if(Room.rooms.get(rid).user1.equals(uid)) {
+            Room.rooms.remove(rid);
+        }
+    }
 }

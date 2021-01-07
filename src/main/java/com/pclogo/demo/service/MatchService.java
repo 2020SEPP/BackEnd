@@ -11,4 +11,5 @@ public interface MatchService {
     Boolean sendCommand(Integer uid, Integer rid, String command);
     List<String> getCommand(Integer uid, Integer rid);
     UserUtil getOtherPlayer(Integer uid, Integer rid);
+    void removeRoom(Integer uid, Integer rid);
 }
