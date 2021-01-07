@@ -92,7 +92,7 @@ public class UserDaoImpl implements UserDao {
         return userUtil;
     }
 
-    private void setUser(User user, UserUtil userUtil) {
+    public void setUser(User user, UserUtil userUtil) {
         UserMongo userMongo = userMongoRepository.findById(user.getId()).orElse(null);
         userUtil.setJudge(true);
         userUtil.setUid(user.getId());

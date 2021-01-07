@@ -2,7 +2,9 @@ package com.pclogo.demo.daoImpl;
 
 import com.pclogo.demo.DemoApplicationTests;
 import com.pclogo.demo.dao.UserDao;
+import com.pclogo.demo.entity.User;
 import com.pclogo.demo.repository.UserRepository;
+import com.pclogo.demo.utils.UserUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserDaoImplTest extends DemoApplicationTests
 {
     @Autowired
-    UserDao userDao;
+    UserDaoImpl userDao;
 
     @Autowired
     WebApplicationContext context;
@@ -139,8 +141,16 @@ class UserDaoImplTest extends DemoApplicationTests
     @Test
     void setFriends() {
         List<Integer> tmp = new ArrayList<>();
-        userDao.setInvites(2, tmp);
-        userDao.setInvites(-1, tmp);
+        userDao.setFriends(2, tmp);
+        userDao.setFriends(-1, tmp);
+    }
+
+    @Test
+    void testSetUser()
+    {
+        User user = new User();
+        UserUtil userUtil = new UserUtil();
+        userDao.setUser(user, userUtil);
     }
 
 }
