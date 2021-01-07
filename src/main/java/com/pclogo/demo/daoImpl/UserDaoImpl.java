@@ -207,17 +207,4 @@ public class UserDaoImpl implements UserDao {
         userMongoRepository.save(userMongo);
     }
 
-    private void jiahaoyou1(Integer uid, Integer touid) {
-        UserMongo userMongo1 = userMongoRepository.findById(uid).orElse(null);
-        assert userMongo1 != null;
-        List<Integer> friends1 = userMongo1.getFriends();
-        if(friends1 == null) friends1 = new ArrayList<>();
-        friends1.add(touid);
-        userMongo1.setFriends(friends1);
-        System.out.println(userMongo1);
-        System.out.println(uid);
-        System.out.println(userMongoRepository.findById(uid));
-        userMongoRepository.save(userMongo1);
-    }
-
 }

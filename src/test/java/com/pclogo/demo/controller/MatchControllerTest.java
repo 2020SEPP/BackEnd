@@ -67,6 +67,6 @@ class MatchControllerTest {
 
     @Test
     void getOtherPlayer() {
-        matchController.getCommand(1, 1001);
+        matchController.getOtherPlayer(1, 1001);
     }
 }

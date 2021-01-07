@@ -1,6 +1,7 @@
 package com.pclogo.demo.serviceImpl;
 
 import com.pclogo.demo.service.UserService;
+import com.pclogo.demo.utils.UserUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -121,5 +122,12 @@ class UserServiceImplTest {
     void searchByPhone() {
         userService.searchByPhone("15044341612");
         userService.searchByPhone("-1");
+    }
+
+    @Test
+    void setToken()
+    {
+        UserUtil userUtil = null;
+        userService.setToken(userUtil);
     }
 }

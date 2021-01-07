@@ -56,7 +56,7 @@ class UserDaoImplTest extends DemoApplicationTests
 
     @Test
     void lookupname() {
-        userDao.lookup("xjh");
+        userDao.lookupname("xjh");
     }
 
     @Test

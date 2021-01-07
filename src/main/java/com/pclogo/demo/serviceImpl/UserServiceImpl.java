@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
-    private UserUtil setToken(UserUtil userUtil)
+    public UserUtil setToken(UserUtil userUtil)
     {
         if(userUtil == null)
         {
