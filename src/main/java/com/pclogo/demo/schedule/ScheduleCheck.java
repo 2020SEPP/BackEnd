@@ -17,6 +17,8 @@ public class ScheduleCheck {
         for(Map.Entry<Integer, RoomUtil> entry : Room.rooms.entrySet())
         {
             if(current_time - entry.getValue().user1LastTime > 5000 * 60 && current_time - entry.getValue().user2LastTime > 5000 * 60)
+//            if(entry.getValue().user1 != -1 && current_time - entry.getValue().user1LastTime > 30 * 1000 ||
+//                    entry.getValue().user2 != -1 && current_time - entry.getValue().user2LastTime > 30 * 1000)
             {
 //                System.out.println("抹除了" + entry.getKey());
                 Room.rooms.remove(entry.getKey());
