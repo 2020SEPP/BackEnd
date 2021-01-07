@@ -27,6 +27,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User searchByPhone(String phone);
 
     @Nullable
-    @Query(value = "select * from user where user.name like '%'+?1+'%'", nativeQuery = true)
+    @Query(value = "select * from user where user.name like ?1", nativeQuery = true)
     List<User> searchByName(String name);
 }

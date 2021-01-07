@@ -103,7 +103,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<UserUtil> searchByName(String name) {
-        List<User> list = userRepository.searchByName(name);
+        String src = "%";
+        src += name;
+        src += "%";
+        List<User> list = userRepository.searchByName(src);
         if(list == null) return null;
         List<UserUtil> reslist = new ArrayList<>();
         for (User user : list) {
